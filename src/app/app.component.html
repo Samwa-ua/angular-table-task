@@ -4,39 +4,32 @@
 </mat-form-field>
 
 <div>
-  <table mat-table matSort>
+  <table mat-table [dataSource]="dataSource" matSort>
 
 
     <ng-container matColumnDef="id">
       <th mat-header-cell *matHeaderCellDef mat-sort-header> ID </th>
-      <td mat-cell *matCellDef="let row"> id </td>
+      <td mat-cell *matCellDef="let row"> {{row.id}} </td>
     </ng-container>
-
-
-    <ng-container matColumnDef="bookId">
-      <th mat-header-cell *matHeaderCellDef mat-sort-header> bookId </th>
-      <td mat-cell *matCellDef="let row"> bookId </td>
-    </ng-container>
-
 
     <ng-container matColumnDef="title">
       <th mat-header-cell *matHeaderCellDef mat-sort-header> title </th>
-      <td mat-cell *matCellDef="let row"> bookTitle </td>
+      <td mat-cell *matCellDef="let row"> {{row.title}} </td>
     </ng-container>
 
 
     <ng-container matColumnDef="description">
       <th mat-header-cell *matHeaderCellDef mat-sort-header> description </th>
-      <td mat-cell *matCellDef="let row"> description </td>
+      <td mat-cell *matCellDef="let row"> {{row.description}} </td>
     </ng-container>
 
 
     <ng-container matColumnDef="pageCount">
       <th mat-header-cell *matHeaderCellDef mat-sort-header> pageCount </th>
-      <td mat-cell *matCellDef="let row"> pageCount </td>
+      <td mat-cell *matCellDef="let row"> {{row.pageCount}} </td>
     </ng-container>
 
-    <tr mat-header-row></tr>
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
     <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
   </table>
 
