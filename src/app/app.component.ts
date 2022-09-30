@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { TableService } from './table.service';
 
 @Component({
   selector: 'app-root',
@@ -7,4 +8,11 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'angular-table-task';
+
+  constructor(private service: TableService) {
+    this.service.getData().subscribe((data) => {
+      // console.log(data);
+
+    })
+  }
 }
