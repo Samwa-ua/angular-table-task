@@ -1,10 +1,10 @@
 import { BooksData } from './IBooksData';
 import { Component, ViewChild } from '@angular/core';
+
 import { TableService } from './table.service';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
-
 
 @Component({
   selector: 'app-root',
@@ -15,7 +15,6 @@ export class AppComponent {
   @ViewChild(MatPaginator) paginator!: MatPaginator
   @ViewChild(MatSort) sort!: MatSort
 
-  title = 'angular-table-task';
   displayedColumns: string[] = ['id', 'title', 'description', 'pageCount', 'publishDate'];
   dataSource!: MatTableDataSource<BooksData>
   books: BooksData[] = []
