@@ -16,7 +16,7 @@ export class AppComponent {
   @ViewChild(MatSort) sort!: MatSort
 
   title = 'angular-table-task';
-  displayedColumns: string[] = ['id', 'title', 'description', 'pageCount'];
+  displayedColumns: string[] = ['id', 'title', 'description', 'pageCount', 'publishDate'];
   dataSource!: MatTableDataSource<BooksData>
   books: BooksData[] = []
 
