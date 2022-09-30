@@ -6,7 +6,7 @@
 </mat-form-field>
 
 <div>
-  <table mat-table [dataSource]="dataSource" matSort>
+  <table id="excel-table" mat-table [dataSource]="dataSource" matSort>
 
     <ng-container matColumnDef="id">
       <th mat-header-cell *matHeaderCellDef mat-sort-header> ID </th>
@@ -40,6 +40,6 @@
       <td class="mat-cell" colspan="4">No search result for: "{{input.value}}"</td>
     </tr>
   </table>
-
+  <button (click)="exportexcel()">Export to Excel</button>
   <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]" aria-label="Select page of books"></mat-paginator>
 </div>

@@ -1,4 +1,4 @@
-import { Component, Input, ViewChild } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import {
   ChartComponent as Chart,
   ApexAxisChartSeries,
@@ -9,7 +9,6 @@ import {
   ApexStroke,
   ApexGrid
 } from "ng-apexcharts";
-import { BooksData } from '../IBooksData';
 import { TableService } from '../table.service';
 
 export type ChartOptions = {
@@ -34,16 +33,18 @@ export class ChartComponent {
   numberOfBooks: number[] = []
   yearOfPublish: string[] = []
 
-  constructor(private service: TableService) {
+  constructor(private service: TableService) { }
+
+  ngOnInit() {
     this.service.getData().subscribe((data) => {
-      this.numberOfBooks = data.map(el => el.pageCount).slice(0, 10)
-      this.yearOfPublish = data.map(el => el.publishDate).map(el => new Date(el).toLocaleDateString('en-US', { year: 'numeric', month: '2-digit' })).slice(0, 10)
+      this.numberOfBooks = data.map(el => el.pageCount)
+      this.yearOfPublish = data.map(el => el.publishDate).map(el => new Date(el).toLocaleDateString('en-US', { year: 'numeric', month: '2-digit' }))
 
       this.chartOptions = {
         series: [
           {
             name: "Number of Books",
-            data: this.numberOfBooks
+            data: this.numberOfBooks.slice(0, 10)
           }
         ],
         chart: {
@@ -70,7 +71,7 @@ export class ChartComponent {
           }
         },
         xaxis: {
-          categories: this.yearOfPublish
+          categories: this.yearOfPublish.slice(0, 10)
         }
       };
 

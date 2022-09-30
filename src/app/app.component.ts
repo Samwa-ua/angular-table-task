@@ -6,6 +6,8 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 
+import * as XLSX from 'xlsx';
+
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -19,7 +21,8 @@ export class AppComponent {
   dataSource!: MatTableDataSource<BooksData>
   books: BooksData[] = []
 
-  data: any = 'Test dfdfgdfg'
+  fileName: string = 'ExcelSheet.xlsx';
+
 
   constructor(private service: TableService) {
     this.service.getData().subscribe((data) => {
@@ -37,5 +40,13 @@ export class AppComponent {
     if (this.dataSource.paginator) {
       this.dataSource.paginator.firstPage()
     }
+  }
+
+  exportexcel(): void {
+    let element = document.getElementById('excel-table');
+    const ws: XLSX.WorkSheet = XLSX.utils.table_to_sheet(element);
+    const wb: XLSX.WorkBook = XLSX.utils.book_new();
+    XLSX.utils.book_append_sheet(wb, ws, 'Sheet1');
+    XLSX.writeFile(wb, this.fileName);
   }
 }
