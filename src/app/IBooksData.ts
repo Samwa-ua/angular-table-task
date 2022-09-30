@@ -1,7 +1,7 @@
 export interface BooksData {
-    id: Number;
-    title: String;
+    id: number;
+    title: string;
     description: String;
-    pageCount: Number;
-    publishDate: String;
+    pageCount: number;
+    publishDate: string;
 }

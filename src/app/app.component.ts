@@ -19,9 +19,10 @@ export class AppComponent {
   dataSource!: MatTableDataSource<BooksData>
   books: BooksData[] = []
 
+  data: any = 'Test dfdfgdfg'
+
   constructor(private service: TableService) {
     this.service.getData().subscribe((data) => {
-      console.log(data);
       this.books = data
       this.dataSource = new MatTableDataSource(this.books)
       this.dataSource.paginator = this.paginator
