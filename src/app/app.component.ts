@@ -8,11 +8,12 @@ import { TableService } from './table.service';
 })
 export class AppComponent {
   title = 'angular-table-task';
+  displayedColumns: string[] = ['id', 'bookId', 'title', 'description', 'pageCount'];
 
-  constructor(private service: TableService) {
-    this.service.getData().subscribe((data) => {
-      // console.log(data);
+  // constructor(private service: TableService) {
+  //   this.service.getData().subscribe((data) => {
+  //     console.log(data);
 
-    })
-  }
+  //   })
+  // }
 }

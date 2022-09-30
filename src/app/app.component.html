@@ -1,0 +1,44 @@
+<mat-form-field appearance="standard">
+  <mat-label>Filter Table</mat-label>
+  <input matInput placeholder="search" />
+</mat-form-field>
+
+<div>
+  <table mat-table matSort>
+
+
+    <ng-container matColumnDef="id">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> ID </th>
+      <td mat-cell *matCellDef="let row"> id </td>
+    </ng-container>
+
+
+    <ng-container matColumnDef="bookId">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> bookId </th>
+      <td mat-cell *matCellDef="let row"> bookId </td>
+    </ng-container>
+
+
+    <ng-container matColumnDef="title">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> title </th>
+      <td mat-cell *matCellDef="let row"> bookTitle </td>
+    </ng-container>
+
+
+    <ng-container matColumnDef="description">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> description </th>
+      <td mat-cell *matCellDef="let row"> description </td>
+    </ng-container>
+
+
+    <ng-container matColumnDef="pageCount">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> pageCount </th>
+      <td mat-cell *matCellDef="let row"> pageCount </td>
+    </ng-container>
+
+    <tr mat-header-row></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+  </table>
+
+  <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]" aria-label="Select page of books"></mat-paginator>
+</div>
