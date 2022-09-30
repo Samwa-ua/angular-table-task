@@ -1,5 +1,7 @@
+import { Observable } from 'rxjs';
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { BooksData } from './IBooksData';
 
 @Injectable({
   providedIn: 'root'
@@ -9,7 +11,7 @@ export class TableService {
 
   constructor(private http: HttpClient) { }
 
-  getData() {
-    return this.http.get(this.baseUrl)
+  getData(): Observable<BooksData[]> {
+    return this.http.get<BooksData[]>(this.baseUrl)
   }
 }
