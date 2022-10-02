@@ -76,15 +76,15 @@ export class ChartComponent implements OnInit {
 
   ngOnInit() {
     this.service.getAllData().subscribe((data) => {
-      this.numberOfPages = data.map(el => el.pageCount)
+      this.numberOfPages = data.map(book => book.pageCount)
       this.chartOptions.series = [{
-        name: "Number of Books",
+        name: "Number of published Pages",
         data: this.numberOfPages.slice(0, 8)
       }]
     })
 
     this.service.getGroupOfYears().subscribe((data) => {
-      this.monthOfPublish = data.map((el) => el.publishDate)
+      this.monthOfPublish = data.map((book) => book.publishDate)
 
       this.chartOptions.xaxis =
       {
