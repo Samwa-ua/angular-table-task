@@ -1,7 +1,7 @@
 import { BooksData } from '../shared/interfaces/IBooksData';
 import { Component, ViewChild } from '@angular/core';
 
-import { TableService } from '../table.service';
+import { TableService } from '../shared/services/table.service';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';

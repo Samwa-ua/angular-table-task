@@ -6,19 +6,19 @@ import {
   ApexXAxis,
   ApexDataLabels,
   ApexTitleSubtitle,
+  ApexPlotOptions,
   ApexStroke,
-  ApexGrid
 } from "ng-apexcharts";
-import { TableService } from '../table.service';
+import { TableService } from '../shared/services/table.service';
 
 export type ChartOptions = {
   series: ApexAxisChartSeries;
   chart: ApexChart;
-  xaxis: ApexXAxis;
   dataLabels: ApexDataLabels;
-  grid: ApexGrid;
+  xaxis: ApexXAxis;
   stroke: ApexStroke;
   title: ApexTitleSubtitle;
+  plotOptions: ApexPlotOptions;
 };
 
 @Component({
@@ -30,8 +30,8 @@ export class ChartComponent implements OnInit {
   @ViewChild("chart") chart!: Chart;
   public chartOptions!: Partial<ChartOptions>;
 
-  numberOfBooks: number[] = []
-  yearOfPublish: number[] = []
+  numberOfPages: number[] = []
+  monthOfPublish: string[] = []
 
   constructor(private service: TableService) { }
 
@@ -45,21 +45,30 @@ export class ChartComponent implements OnInit {
           enabled: false
         }
       },
+      plotOptions: {
+        bar: {
+          horizontal: true,
+          dataLabels: {
+            position: "top"
+          }
+        }
+      },
       dataLabels: {
-        enabled: false
+        enabled: true,
+        offsetX: -6,
+        style: {
+          fontSize: "12px",
+          colors: ["#fff"]
+        }
       },
       stroke: {
-        curve: "straight"
+        show: true,
+        width: 1,
+        colors: ["#fff"]
       },
       title: {
-        text: "Number of Books published by Year",
+        text: "Number of Pages published by Month",
         align: "left"
-      },
-      grid: {
-        row: {
-          colors: ["#f3f3f3", "transparent"],
-          opacity: 0.5
-        }
       },
       xaxis: {}
     };
@@ -67,19 +76,20 @@ export class ChartComponent implements OnInit {
 
   ngOnInit() {
     this.service.getAllData().subscribe((data) => {
-      this.numberOfBooks = data.map(el => el.pageCount)
-      this.yearOfPublish = data.map(el => el.publishDate).map(el => Number(new Date(el).toLocaleDateString('en-US', { month: '2-digit' })))
+      this.numberOfPages = data.map(el => el.pageCount)
       this.chartOptions.series = [{
         name: "Number of Books",
-        data: this.numberOfBooks
+        data: this.numberOfPages.slice(0, 8)
       }]
+    })
+
+    this.service.getGroupOfYears().subscribe((data) => {
+      this.monthOfPublish = data.map((el) => el.publishDate)
+
       this.chartOptions.xaxis =
       {
-        categories: this.yearOfPublish
+        categories: Array.from(new Set(this.monthOfPublish))
       }
-    })
-    this.service.getGroupOfYears().subscribe((data) => {
-      console.log(data);
 
     })
     this.drawGraph()
