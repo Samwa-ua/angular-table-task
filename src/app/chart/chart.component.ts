@@ -1,4 +1,4 @@
-import { Component, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import {
   ChartComponent as Chart,
   ApexAxisChartSeries,
@@ -26,56 +26,63 @@ export type ChartOptions = {
   templateUrl: './chart.component.html',
   styleUrls: ['./chart.component.css']
 })
-export class ChartComponent {
+export class ChartComponent implements OnInit {
   @ViewChild("chart") chart!: Chart;
   public chartOptions!: Partial<ChartOptions>;
 
   numberOfBooks: number[] = []
-  yearOfPublish: string[] = []
+  yearOfPublish: number[] = []
 
   constructor(private service: TableService) { }
 
-  ngOnInit() {
-    this.service.getData().subscribe((data) => {
-      this.numberOfBooks = data.map(el => el.pageCount)
-      this.yearOfPublish = data.map(el => el.publishDate).map(el => new Date(el).toLocaleDateString('en-US', { year: 'numeric', month: '2-digit' }))
-
-      this.chartOptions = {
-        series: [
-          {
-            name: "Number of Books",
-            data: this.numberOfBooks.slice(0, 10)
-          }
-        ],
-        chart: {
-          height: 350,
-          type: "line",
-          zoom: {
-            enabled: false
-          }
-        },
-        dataLabels: {
+  drawGraph() {
+    this.chartOptions = {
+      series: [],
+      chart: {
+        height: 350,
+        type: "bar",
+        zoom: {
           enabled: false
-        },
-        stroke: {
-          curve: "straight"
-        },
-        title: {
-          text: "Number of Books published by Year",
-          align: "left"
-        },
-        grid: {
-          row: {
-            colors: ["#f3f3f3", "transparent"],
-            opacity: 0.5
-          }
-        },
-        xaxis: {
-          categories: this.yearOfPublish.slice(0, 10)
         }
-      };
+      },
+      dataLabels: {
+        enabled: false
+      },
+      stroke: {
+        curve: "straight"
+      },
+      title: {
+        text: "Number of Books published by Year",
+        align: "left"
+      },
+      grid: {
+        row: {
+          colors: ["#f3f3f3", "transparent"],
+          opacity: 0.5
+        }
+      },
+      xaxis: {}
+    };
+  }
+
+  ngOnInit() {
+    this.service.getAllData().subscribe((data) => {
+      this.numberOfBooks = data.map(el => el.pageCount)
+      this.yearOfPublish = data.map(el => el.publishDate).map(el => Number(new Date(el).toLocaleDateString('en-US', { month: '2-digit' })))
+      this.chartOptions.series = [{
+        name: "Number of Books",
+        data: this.numberOfBooks
+      }]
+      this.chartOptions.xaxis =
+      {
+        categories: this.yearOfPublish
+      }
+    })
+    this.service.getGroupOfYears().subscribe((data) => {
+      console.log(data);
 
     })
+    this.drawGraph()
   }
 
 }

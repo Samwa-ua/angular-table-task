@@ -5,3 +5,7 @@ export interface BooksData {
     pageCount: number;
     publishDate: string;
 }
+
+export interface TransformedData {
+    publishDate: string;
+}

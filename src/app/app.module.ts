@@ -12,11 +12,13 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { NgApexchartsModule } from "ng-apexcharts";
 import { ChartComponent } from './chart/chart.component';
+import { TableComponent } from './table/table.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     ChartComponent,
+    TableComponent,
   ],
   imports: [
     BrowserModule,
