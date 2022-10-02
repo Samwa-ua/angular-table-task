@@ -7,6 +7,24 @@ table {
   width: 100%;
 }
 
+table th {
+  font-size: 0.8rem;
+  font-weight: bold;
+}
+
+td.mat-cell:nth-child(2) {
+  width: 3rem;
+}
+
+td.mat-cell:nth-child(3) {
+  padding: 0.5rem;
+  text-align: justify;
+}
+
+td.mat-cell:nth-child(4) {
+  text-align: center;
+}
+
 button {
   margin-top: 1rem;
 }
