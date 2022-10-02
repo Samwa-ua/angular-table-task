@@ -1,6 +1,11 @@
-<div id="chart"
-    *ngIf="chartOptions.series && chartOptions.chart && chartOptions.xaxis &&chartOptions.dataLabels && chartOptions.grid &&chartOptions.stroke && chartOptions.title">
-    <apx-chart [series]="chartOptions.series" [chart]="chartOptions.chart" [xaxis]="chartOptions.xaxis"
-        [dataLabels]="chartOptions.dataLabels" [grid]="chartOptions.grid" [stroke]="chartOptions.stroke"
-        [title]="chartOptions.title"></apx-chart>
-</div>
+<section class="main__chart-wrapper">
+
+    <div id="chart"
+        *ngIf="chartOptions.series && chartOptions.chart && chartOptions.xaxis &&chartOptions.dataLabels && chartOptions.grid &&chartOptions.stroke && chartOptions.title">
+        <apx-chart [series]="chartOptions.series" [chart]="chartOptions.chart" [xaxis]="chartOptions.xaxis"
+            [dataLabels]="chartOptions.dataLabels" [grid]="chartOptions.grid" [stroke]="chartOptions.stroke"
+            [title]="chartOptions.title"></apx-chart>
+    </div>
+
+
+</section>

@@ -1,0 +1,12 @@
+.main__table-wrapper {
+  margin: 0 auto;
+  width: 90%;
+}
+
+table {
+  width: 100%;
+}
+
+button {
+  margin-top: 1rem;
+}
